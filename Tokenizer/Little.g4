@@ -27,8 +27,8 @@ base_stmt : (assign_stmt)|(read_stmt)|(write_stmt)|(return_stmt);
 
 assign_stmt : assign_expr ';';
 assign_expr : id ':=' expr;
-read_stmt : 'READ (' id_list ');';
-write_stmt : 'WRITE (' id_list ');';
+read_stmt : 'READ' '(' id_list ')' ';';
+write_stmt : 'WRITE' '(' id_list ')' ';';
 return_stmt : 'RETURN' expr ';';
 
 expr : expr_prefix factor;
@@ -43,12 +43,12 @@ primary : ('(' expr ')')|(id)|(INTLITERAL)|(FLOATLITERAL);
 addop : '+'|'-';
 mulop : '*'|'/';
 
-if_stmt : 'IF (' cond ')' decl stmt_list else_part 'ENDIF';
+if_stmt : 'IF' '(' cond ')' decl stmt_list else_part 'ENDIF';
 else_part : ('ELSE' decl stmt_list)?;
 cond : expr compop expr;
 compop : '<'|'>'|'='|'!='|'<='|'>=';
 
-while_stmt : 'WHILE (' cond ')' decl stmt_list 'ENDWHILE';
+while_stmt : 'WHILE' '(' cond ')' decl stmt_list 'ENDWHILE';
 
 COMMENT : '--'.*'\n';
 
