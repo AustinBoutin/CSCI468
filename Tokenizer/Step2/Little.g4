@@ -11,11 +11,11 @@ var_decl : var_type id_list ';';
 var_type : ('FLOAT')|('INT');
 any_type : (var_type)|('VOID');
 id_list : id id_tail;
-id_tail : (id id_tail)?;
+id_tail : (',' id id_tail)?;
 
 param_decl_list : (param_decl param_decl_tail)?;
 param_decl : var_type id;
-param_decl_tail : (param_decl param_decl_tail)?;
+param_decl_tail : (',' param_decl param_decl_tail)?;
 
 func_declarations : (func_decl func_declarations)?;
 func_decl : 'FUNCTION' any_type id '('param_decl_list') BEGIN' func_body 'END';
@@ -38,7 +38,7 @@ factor_prefix : (factor_prefix postfix_expr mulop)?;
 postfix_expr : (primary)|(call_expr);
 call_expr : id '(' expr_list ')';
 expr_list : (expr expr_list_tail)?;
-expr_list_tail : (expr expr_list_tail)?;
+expr_list_tail : (',' expr expr_list_tail)?;
 primary : ('(' expr ')')|(id)|(INTLITERAL)|(FLOATLITERAL);
 addop : '+'|'-';
 mulop : '*'|'/';
@@ -50,17 +50,17 @@ compop : '<'|'>'|'='|'!='|'<='|'>=';
 
 while_stmt : 'WHILE' '(' cond ')' decl stmt_list 'ENDWHILE';
 
-COMMENT : '--'.*'\n';
+COMMENT : '--'.*?'\n' -> skip;
 
-STRINGLITERAL : '"'.*'"';
+STRINGLITERAL : '"'.*?'"';
+
+KEYWORD : ('PROGRAM'|'BEGIN'|'FUNCTION'|'READ'|'WRITE'|'ELSE'|'ENDIF'|'ENDWHILE'|'CONTINUE'|'BREAK'|'RETURN'|'INT'|'VOID'|'STRING'|'FLOAT'|'END'|'IF'|'WHILE');
 
 IDENTIFIER : [A-z]([0-9]|[A-z])*;
 
-FLOATLITERAL : '-'?[0-9]*'.'[0-9]+;
+FLOATLITERAL : [0-9]*'.'[0-9]+;
 
-INTLITERAL : '-'?[0-9]+;
-
-KEYWORD : ('PROGRAM'|'BEGIN'|'FUNCTION'|'READ'|'WRITE'|'ELSE'|'ENDIF'|'ENDWHILE'|'CONTINUE'|'BREAK'|'RETURN'|'INT'|'VOID'|'STRING'|'FLOAT'|'END'|'IF');
+INTLITERAL : [0-9]+;
 
 OPERATOR : (':='|'!='|'<='|'>='|'+'|'-'|'*'|'/'|'('|')'|';'|','|'<'|'>'|'=');
 

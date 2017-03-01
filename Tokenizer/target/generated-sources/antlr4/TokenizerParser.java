@@ -16,8 +16,8 @@ public class TokenizerParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		COMMENT=1, STRINGLITERAL=2, IDENTIFIER=3, FLOATLITERAL=4, INTLITERAL=5, 
-		KEYWORD=6, OPERATOR=7, WS=8;
+		COMMENT=1, STRINGLITERAL=2, KEYWORD=3, IDENTIFIER=4, FLOATLITERAL=5, INTLITERAL=6, 
+		OPERATOR=7, WS=8;
 	public static final int
 		RULE_r = 0, RULE_token = 1;
 	public static final String[] ruleNames = {
@@ -27,8 +27,8 @@ public class TokenizerParser extends Parser {
 	private static final String[] _LITERAL_NAMES = {
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "COMMENT", "STRINGLITERAL", "IDENTIFIER", "FLOATLITERAL", "INTLITERAL", 
-		"KEYWORD", "OPERATOR", "WS"
+		null, "COMMENT", "STRINGLITERAL", "KEYWORD", "IDENTIFIER", "FLOATLITERAL", 
+		"INTLITERAL", "OPERATOR", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -81,12 +81,6 @@ public class TokenizerParser extends Parser {
 	}
 	public static class RContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(TokenizerParser.EOF, 0); }
-		public List<TokenContext> token() {
-			return getRuleContexts(TokenContext.class);
-		}
-		public TokenContext token(int i) {
-			return getRuleContext(TokenContext.class,i);
-		}
 		public RContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -111,11 +105,11 @@ public class TokenizerParser extends Parser {
 			setState(7);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << STRINGLITERAL) | (1L << IDENTIFIER) | (1L << FLOATLITERAL) | (1L << INTLITERAL) | (1L << KEYWORD) | (1L << OPERATOR) | (1L << WS))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << STRINGLITERAL) | (1L << KEYWORD) | (1L << IDENTIFIER) | (1L << FLOATLITERAL) | (1L << INTLITERAL) | (1L << OPERATOR) | (1L << WS))) != 0)) {
 				{
 				{
 				setState(4);
-				token();
+				matchWildcard();
 				}
 				}
 				setState(9);
@@ -145,7 +139,6 @@ public class TokenizerParser extends Parser {
 		public TerminalNode INTLITERAL() { return getToken(TokenizerParser.INTLITERAL, 0); }
 		public TerminalNode KEYWORD() { return getToken(TokenizerParser.KEYWORD, 0); }
 		public TerminalNode OPERATOR() { return getToken(TokenizerParser.OPERATOR, 0); }
-		public TerminalNode WS() { return getToken(TokenizerParser.WS, 0); }
 		public TokenContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -169,7 +162,7 @@ public class TokenizerParser extends Parser {
 			{
 			setState(12);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << STRINGLITERAL) | (1L << IDENTIFIER) | (1L << FLOATLITERAL) | (1L << INTLITERAL) | (1L << KEYWORD) | (1L << OPERATOR) | (1L << WS))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << STRINGLITERAL) | (1L << KEYWORD) | (1L << IDENTIFIER) | (1L << FLOATLITERAL) | (1L << INTLITERAL) | (1L << OPERATOR))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -193,7 +186,7 @@ public class TokenizerParser extends Parser {
 	public static final String _serializedATN =
 		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\n\21\4\2\t\2\4\3"+
 		"\t\3\3\2\7\2\b\n\2\f\2\16\2\13\13\2\3\2\3\2\3\3\3\3\3\3\2\2\4\2\4\2\3"+
-		"\3\2\3\n\17\2\t\3\2\2\2\4\16\3\2\2\2\6\b\5\4\3\2\7\6\3\2\2\2\b\13\3\2"+
+		"\3\2\3\t\17\2\t\3\2\2\2\4\16\3\2\2\2\6\b\13\2\2\2\7\6\3\2\2\2\b\13\3\2"+
 		"\2\2\t\7\3\2\2\2\t\n\3\2\2\2\n\f\3\2\2\2\13\t\3\2\2\2\f\r\7\2\2\3\r\3"+
 		"\3\2\2\2\16\17\t\2\2\2\17\5\3\2\2\2\3\t";
 	public static final ATN _ATN =

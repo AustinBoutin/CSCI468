@@ -1,25 +1,21 @@
 grammar Tokenizer;
 
-options{
-	buildAST=true;
-}
+r : .* EOF;
 
-r : token* EOF;
+token : (COMMENT|STRINGLITERAL|IDENTIFIER|FLOATLITERAL|INTLITERAL|KEYWORD|OPERATOR);
 
-token : (COMMENT|STRINGLITERAL|IDENTIFIER|FLOATLITERAL|INTLITERAL|KEYWORD|OPERATOR|WS);
+COMMENT : '--'.*?'\n' -> skip;
 
-COMMENT : '--'.*'\n';
+STRINGLITERAL : '"'.*?'"';
 
-STRINGLITERAL : '"'.*'"';
+KEYWORD : ('PROGRAM'|'BEGIN'|'FUNCTION'|'READ'|'WRITE'|'ELSE'|'ENDIF'|'ENDWHILE'|'CONTINUE'|'BREAK'|'RETURN'|'INT'|'VOID'|'STRING'|'FLOAT'|'END'|'IF'|'WHILE');
 
 IDENTIFIER : [A-z]([0-9]|[A-z])*;
 
-FLOATLITERAL : '-'?[0-9]*'.'[0-9]+;
+FLOATLITERAL : [0-9]*'.'[0-9]+;
 
-INTLITERAL : '-'?[0-9]+;
-
-KEYWORD : ('PROGRAM'|'BEGIN'|'FUNCTION'|'READ'|'WRITE'|'ELSE'|'ENDIF'|'ENDWHILE'|'CONTINUE'|'BREAK'|'RETURN'|'INT'|'VOID'|'STRING'|'FLOAT'|'END'|'IF');
+INTLITERAL : [0-9]+;
 
 OPERATOR : (':='|'!='|'<='|'>='|'+'|'-'|'*'|'/'|'('|')'|';'|','|'<'|'>'|'=');
 
-WS : [ \t\r]+ -> skip ;
+WS : [ \t\r\n]+ -> skip ;
