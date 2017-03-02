@@ -1,4 +1,4 @@
-// Generated from Tokenizer.g4 by ANTLR 4.6
+// Generated from Tokenizer.g4 by ANTLR 4.4
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class TokenizerParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -18,53 +18,21 @@ public class TokenizerParser extends Parser {
 	public static final int
 		COMMENT=1, STRINGLITERAL=2, KEYWORD=3, IDENTIFIER=4, FLOATLITERAL=5, INTLITERAL=6, 
 		OPERATOR=7, WS=8;
+	public static final String[] tokenNames = {
+		"<INVALID>", "COMMENT", "STRINGLITERAL", "KEYWORD", "IDENTIFIER", "FLOATLITERAL", 
+		"INTLITERAL", "OPERATOR", "WS"
+	};
 	public static final int
 		RULE_r = 0, RULE_token = 1;
 	public static final String[] ruleNames = {
 		"r", "token"
 	};
 
-	private static final String[] _LITERAL_NAMES = {
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, "COMMENT", "STRINGLITERAL", "KEYWORD", "IDENTIFIER", "FLOATLITERAL", 
-		"INTLITERAL", "OPERATOR", "WS"
-	};
-	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
-
-	/**
-	 * @deprecated Use {@link #VOCABULARY} instead.
-	 */
-	@Deprecated
-	public static final String[] tokenNames;
-	static {
-		tokenNames = new String[_SYMBOLIC_NAMES.length];
-		for (int i = 0; i < tokenNames.length; i++) {
-			tokenNames[i] = VOCABULARY.getLiteralName(i);
-			if (tokenNames[i] == null) {
-				tokenNames[i] = VOCABULARY.getSymbolicName(i);
-			}
-
-			if (tokenNames[i] == null) {
-				tokenNames[i] = "<INVALID>";
-			}
-		}
-	}
-
-	@Override
-	@Deprecated
-	public String[] getTokenNames() {
-		return tokenNames;
-	}
-
-	@Override
-
-	public Vocabulary getVocabulary() {
-		return VOCABULARY;
-	}
-
 	@Override
 	public String getGrammarFileName() { return "Tokenizer.g4"; }
+
+	@Override
+	public String[] getTokenNames() { return tokenNames; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -116,8 +84,7 @@ public class TokenizerParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(10);
-			match(EOF);
+			setState(10); match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -133,11 +100,11 @@ public class TokenizerParser extends Parser {
 
 	public static class TokenContext extends ParserRuleContext {
 		public TerminalNode COMMENT() { return getToken(TokenizerParser.COMMENT, 0); }
-		public TerminalNode STRINGLITERAL() { return getToken(TokenizerParser.STRINGLITERAL, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(TokenizerParser.IDENTIFIER, 0); }
-		public TerminalNode FLOATLITERAL() { return getToken(TokenizerParser.FLOATLITERAL, 0); }
 		public TerminalNode INTLITERAL() { return getToken(TokenizerParser.INTLITERAL, 0); }
+		public TerminalNode STRINGLITERAL() { return getToken(TokenizerParser.STRINGLITERAL, 0); }
+		public TerminalNode FLOATLITERAL() { return getToken(TokenizerParser.FLOATLITERAL, 0); }
 		public TerminalNode KEYWORD() { return getToken(TokenizerParser.KEYWORD, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(TokenizerParser.IDENTIFIER, 0); }
 		public TerminalNode OPERATOR() { return getToken(TokenizerParser.OPERATOR, 0); }
 		public TokenContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -165,11 +132,7 @@ public class TokenizerParser extends Parser {
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMENT) | (1L << STRINGLITERAL) | (1L << KEYWORD) | (1L << IDENTIFIER) | (1L << FLOATLITERAL) | (1L << INTLITERAL) | (1L << OPERATOR))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
+			consume();
 			}
 		}
 		catch (RecognitionException re) {

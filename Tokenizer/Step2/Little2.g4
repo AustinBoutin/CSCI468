@@ -22,8 +22,8 @@ func_declarations : func_decl func_declarations?;
 func_decl : 'FUNCTION' any_type id '('param_decl_list?') BEGIN' func_body 'END';
 func_body : decl? stmt_list?;
 
-stmt_list : stmt | (stmt stmt_list);
-stmt : (base_stmt?)|(if_stmt?);
+stmt_list : (stmt)+;
+stmt : (base_stmt)|(if_stmt)|(while_stmt);
 base_stmt : (assign_stmt)|(read_stmt)|(write_stmt)|(return_stmt);
 
 assign_stmt : assign_expr ';';
@@ -33,9 +33,11 @@ write_stmt : 'WRITE' '(' id_list ')' ';';
 return_stmt : 'RETURN' expr ';';
 
 expr : expr_prefix? factor;
-expr_prefix : (factor addop)|(expr_prefix factor addop);
-factor : factor_prefix? postfix_expr;
-factor_prefix : (postfix_expr mulop)|(factor_prefix postfix_expr mulop);
+expr_prefix : (expr_prime);
+expr_prime : (factor addop expr_prime)?;
+factor : factor_prefix postfix_expr;
+factor_prefix : (factor_prime);
+factor_prime : (postfix_expr mulop factor_prime)?;
 postfix_expr : (primary)|(call_expr);
 call_expr : id '(' expr_list? ')';
 expr_list : expr expr_list_tail?;

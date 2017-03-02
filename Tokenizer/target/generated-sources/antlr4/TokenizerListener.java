@@ -1,4 +1,5 @@
-// Generated from Tokenizer.g4 by ANTLR 4.6
+// Generated from Tokenizer.g4 by ANTLR 4.4
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -10,20 +11,20 @@ public interface TokenizerListener extends ParseTreeListener {
 	 * Enter a parse tree produced by {@link TokenizerParser#r}.
 	 * @param ctx the parse tree
 	 */
-	void enterR(TokenizerParser.RContext ctx);
+	void enterR(@NotNull TokenizerParser.RContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link TokenizerParser#r}.
 	 * @param ctx the parse tree
 	 */
-	void exitR(TokenizerParser.RContext ctx);
+	void exitR(@NotNull TokenizerParser.RContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TokenizerParser#token}.
 	 * @param ctx the parse tree
 	 */
-	void enterToken(TokenizerParser.TokenContext ctx);
+	void enterToken(@NotNull TokenizerParser.TokenContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link TokenizerParser#token}.
 	 * @param ctx the parse tree
 	 */
-	void exitToken(TokenizerParser.TokenContext ctx);
+	void exitToken(@NotNull TokenizerParser.TokenContext ctx);
 }
