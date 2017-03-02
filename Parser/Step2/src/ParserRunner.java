@@ -13,7 +13,7 @@ public class ParserRunner
     		fis = new FileInputStream(file);
     		CharStream input = new ANTLRInputStream(fis);
 	
-	        TokenizerLexer lexer = new TokenizerLexer(input);
+	        Little2Lexer lexer = new Little2Lexer(input);
 	
 	        Vocabulary vocab = lexer.getVocabulary();
 	

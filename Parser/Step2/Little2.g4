@@ -33,12 +33,12 @@ write_stmt : 'WRITE' '(' id_list ')' ';';
 return_stmt : 'RETURN' expr ';';
 
 expr : expr_prefix? factor;
-expr_prefix : (expr_prime);
+expr_prefix : expr_prime;
 expr_prime : (factor addop expr_prime)?;
 factor : factor_prefix postfix_expr;
-factor_prefix : (factor_prime);
+factor_prefix : factor_prime;
 factor_prime : (postfix_expr mulop factor_prime)?;
-postfix_expr : (primary)|(call_expr);
+postfix_expr : primary|call_expr;
 call_expr : id '(' expr_list? ')';
 expr_list : expr expr_list_tail?;
 expr_list_tail : ',' expr expr_list_tail?;
