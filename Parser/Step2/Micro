@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar Parser.jar $1

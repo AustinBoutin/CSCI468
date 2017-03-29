@@ -14,12 +14,12 @@ any_type : (var_type)|('VOID');
 id_list : id id_tail?;
 id_tail : ',' id id_tail?;
 
-param_decl_list : param_decl param_decl_tail?;
+param_decl_list : (param_decl param_decl_tail?)?;
 param_decl : var_type id;
 param_decl_tail : ',' param_decl param_decl_tail?;
 
 func_declarations : func_decl func_declarations?;
-func_decl : 'FUNCTION' any_type id '('param_decl_list?') BEGIN' func_body 'END';
+func_decl : 'FUNCTION' any_type id '(' param_decl_list ')' 'BEGIN' func_body 'END';
 func_body : decl? stmt_list?;
 
 stmt_list : (stmt)+;
