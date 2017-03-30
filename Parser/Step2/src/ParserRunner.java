@@ -20,19 +20,20 @@ public class ParserRunner
 	        CommonTokenStream tokens = new CommonTokenStream(lexer);
 	        Little2Parser parser = new Little2Parser(tokens);
 	        Listener  listener = new  Listener();
-	        new  ParseTreeWalker ().walk(listener ,parser.program());
-	        //SymbolTable s = listener.getSymbolTable ();
-	        //prettyPrint(listener.getSymbolTable ());
 	        for(int i=0; i<parser.getErrorListeners().size(); i++){
 	        	parser.removeErrorListener(parser.getErrorListeners().get(i));
 	        }
-	        parser.r();
+	        new  ParseTreeWalker ().walk(listener ,parser.program());
+	        //SymbolTable s = listener.getSymbolTable();
+	        //prettyPrint(listener.getSymbolTable());
+	        
+	        /*parser.r();
 	        if(parser.getNumberOfSyntaxErrors()>0){
 	        	System.out.println("Not accepted");
 	        }
 	        else{
 	        	System.out.println("Accepted");
-	        }
+	        }*/
 	        fis.close();
 	      } catch (Exception e) {
 	        e.printStackTrace();

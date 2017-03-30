@@ -4,6 +4,7 @@ import java.util.List;
 public class SymbolTable {
 	private Scope root;
 	private Scope cur;
+	private Symbol curSym;
 	
 	public SymbolTable()
 	{
@@ -22,12 +23,16 @@ public class SymbolTable {
 		cur = s;
 	}
 	
-	public void addSymbol(String type, String name, String value){
+	public void addSymbol(String type, String name){
 		Symbol s = new Symbol();
 		s.name = name;
 		s.type = type;
-		s.value = value;
-		cur.symbols.add(s);
+		curSym = s;
+	}
+	
+	public void setSymbolValue(String value){
+		curSym.value = value;
+		cur.symbols.add(curSym);
 	}
 	
 	public void moveCurToParent(){
