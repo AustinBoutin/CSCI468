@@ -46,13 +46,17 @@ public class SymbolTable {
 	}
 	
 	public void printTable(Scope curScope){
-		System.out.println("Symbol tabel " + curScope.name);
+		if(curScope.equals(root)){
+			System.out.print("Symbol tabel " + curScope.name);
+		} else {
+			System.out.print("\nSymbol tabel " + curScope.name);
+		}
 		
 		for(Symbol symbol : curScope.symbols){
 			if(symbol.type.equals("STRING")){
-				System.out.println("name " + symbol.name + " type " + symbol.type + " value" + symbol.value);
+				System.out.print("\nname " + symbol.name + " type " + symbol.type + " value" + symbol.value);
 			} else {
-				System.out.println("name " + symbol.name + " type " + symbol.type);
+				System.out.print("\nname " + symbol.name + " type " + symbol.type);
 			}
 		}
 		
