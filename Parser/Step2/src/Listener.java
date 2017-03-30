@@ -30,11 +30,17 @@ public class Listener extends Little2BaseListener {
 	@Override 
 	public void exitFunc_decl(Little2Parser.Func_declContext ctx) {
 		s.moveCurToParent();
+		curId = IdType.NONE;
 	}
 	
 	@Override 
 	public void enterString_decl(Little2Parser.String_declContext ctx) {
 		curId = IdType.STRING;
+	}
+	
+	@Override 
+	public void exitString_decl(Little2Parser.String_declContext ctx) {
+		curId = IdType.NONE;
 	}
 	
 	@Override 
@@ -50,6 +56,10 @@ public class Listener extends Little2BaseListener {
 		else if(ctx.getText().equals("FLOAT")){
 			curId = IdType.FLOAT;
 		}
+	}
+	
+	@Override public void exitVar_decl(Little2Parser.Var_declContext ctx) { 
+		curId = IdType.NONE;
 	}
 	
 	@Override 
