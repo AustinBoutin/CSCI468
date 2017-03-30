@@ -12,6 +12,7 @@ public class Listener extends Little2BaseListener {
 		switch(curId){
 			case FUNC:
 				s.addScope(ctx.getText());
+				curId = IdType.NONE;
 				break;
 			case STRING: case INT: case FLOAT:
 				s.addSymbol(curId.name(), ctx.getText());
@@ -49,15 +50,21 @@ public class Listener extends Little2BaseListener {
 	
 	@Override 
 	public void enterVar_type(Little2Parser.Var_typeContext ctx) { 
-		if(ctx.getText().equals("INT")){
+		if(curId != IdType.FUNC){
+			if(ctx.getText().equals("INT")){
 			curId = IdType.INT;
-		}
-		else if(ctx.getText().equals("FLOAT")){
-			curId = IdType.FLOAT;
+			}
+			else if(ctx.getText().equals("FLOAT")){
+				curId = IdType.FLOAT;
+			}
 		}
 	}
 	
 	@Override public void exitVar_decl(Little2Parser.Var_declContext ctx) { 
+		curId = IdType.NONE;
+	}
+	
+	@Override public void exitParam_decl(Little2Parser.Param_declContext ctx) { 
 		curId = IdType.NONE;
 	}
 	
