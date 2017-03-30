@@ -3,8 +3,7 @@ public class Listener extends Little2BaseListener {
 	SymbolTable s = new SymbolTable();
 	int currentBlock = 1;
 	public enum IdType{
-		FUNC, STRING, INT, FLOAT, NONE;
-	}
+		FUNC, STRING, INT, FLOAT, NONE;	}
 	
 	IdType curId = IdType.NONE;
 	

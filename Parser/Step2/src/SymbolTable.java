@@ -6,8 +6,7 @@ public class SymbolTable {
 	private Scope cur;
 	private Symbol curSym;
 	
-	public SymbolTable()
-	{
+	public SymbolTable(){
 		root = new Scope();
 		root.name = "GLOBAL";
 		root.children = new ArrayList<Scope>();
@@ -28,6 +27,9 @@ public class SymbolTable {
 		s.name = name;
 		s.type = type;
 		curSym = s;
+		if(!type.equals("STRING")){
+			setSymbolValue(null);
+		}
 	}
 	
 	public void setSymbolValue(String value){
@@ -37,6 +39,27 @@ public class SymbolTable {
 	
 	public void moveCurToParent(){
 		cur = cur.parent;
+	}
+	
+	public void printTable(){
+		printTable(root);
+	}
+	
+	public void printTable(Scope curScope){
+		System.out.println("Symbol tabel " + curScope.name);
+		
+		for(Symbol symbol : curScope.symbols){
+			if(symbol.type.equals("STRING")){
+				System.out.println("name " + symbol.name + " type " + symbol.type + " value" + symbol.value);
+			} else {
+				System.out.println("name " + symbol.name + " type " + symbol.type);
+			}
+		}
+		
+		for(Scope child : curScope.children){
+			System.out.println();
+			printTable(child);
+		}
 	}
 	
 	public static class Scope {

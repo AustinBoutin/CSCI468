@@ -24,7 +24,8 @@ public class ParserRunner
 	        	parser.removeErrorListener(parser.getErrorListeners().get(i));
 	        }
 	        new  ParseTreeWalker ().walk(listener ,parser.program());
-	        //SymbolTable s = listener.getSymbolTable();
+	        SymbolTable s = listener.getSymbolTable();
+	        s.printTable();
 	        //prettyPrint(listener.getSymbolTable());
 	        
 	        /*parser.r();
