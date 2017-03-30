@@ -25,7 +25,11 @@ public class Listener extends Little2BaseListener {
 	@Override 
 	public void enterFunc_decl(Little2Parser.Func_declContext ctx) {
 		curId = IdType.FUNC;
-		//System.out.println(ctx.getText());
+	}
+	
+	@Override 
+	public void exitFunc_decl(Little2Parser.Func_declContext ctx) {
+		s.moveCurToParent();
 	}
 	
 	@Override 
@@ -35,7 +39,7 @@ public class Listener extends Little2BaseListener {
 	
 	@Override 
 	public void enterStr(Little2Parser.StrContext ctx) {
-		//System.out.println(ctx.getText());
+		s.setSymbolValue(ctx.getText());
 	}
 	
 	@Override 
@@ -46,5 +50,42 @@ public class Listener extends Little2BaseListener {
 		else if(ctx.getText().equals("FLOAT")){
 			curId = IdType.FLOAT;
 		}
+	}
+	
+	@Override 
+	public void enterIf_stmt(Little2Parser.If_stmtContext ctx) {
+		s.addScope("Block " + currentBlock);
+		currentBlock++;
+	}
+	
+	@Override 
+	public void exitIf_stmt(Little2Parser.If_stmtContext ctx) {
+		s.moveCurToParent();
+	}
+	
+	@Override 
+	public void enterElse_part(Little2Parser.Else_partContext ctx) { 
+		s.addScope("Block " + currentBlock);
+		currentBlock++;
+	}
+	
+	@Override 
+	public void exitElse_part(Little2Parser.Else_partContext ctx) {
+		s.moveCurToParent();
+	}
+	
+	@Override 
+	public void enterWhile_stmt(Little2Parser.While_stmtContext ctx) {
+		s.addScope("Block " + currentBlock);
+		currentBlock++;
+	}
+	
+	@Override 
+	public void exitWhile_stmt(Little2Parser.While_stmtContext ctx) {
+		s.moveCurToParent();
+	}
+	
+	public SymbolTable getSymbolTable(){
+		return s;
 	}
 }
