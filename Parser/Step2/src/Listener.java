@@ -70,7 +70,7 @@ public class Listener extends Little2BaseListener {
 	
 	@Override 
 	public void enterIf_stmt(Little2Parser.If_stmtContext ctx) {
-		s.addScope("Block " + currentBlock);
+		s.addScope("BLOCK " + currentBlock);
 		currentBlock++;
 	}
 	
@@ -81,7 +81,7 @@ public class Listener extends Little2BaseListener {
 	
 	@Override 
 	public void enterElse_part(Little2Parser.Else_partContext ctx) { 
-		s.addScope("Block " + currentBlock);
+		s.addScope("BLOCK " + currentBlock);
 		currentBlock++;
 	}
 	
@@ -92,7 +92,7 @@ public class Listener extends Little2BaseListener {
 	
 	@Override 
 	public void enterWhile_stmt(Little2Parser.While_stmtContext ctx) {
-		s.addScope("Block " + currentBlock);
+		s.addScope("BLOCK " + currentBlock);
 		currentBlock++;
 	}
 	

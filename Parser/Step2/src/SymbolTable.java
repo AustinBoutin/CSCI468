@@ -5,6 +5,8 @@ public class SymbolTable {
 	private Scope root;
 	private Scope cur;
 	private Symbol curSym;
+	private boolean isError = false;
+	private List<String> errorList = new ArrayList<String>();
 	
 	public SymbolTable(){
 		root = new Scope();
@@ -23,12 +25,21 @@ public class SymbolTable {
 	}
 	
 	public void addSymbol(String type, String name){
-		Symbol s = new Symbol();
-		s.name = name;
-		s.type = type;
-		curSym = s;
-		if(!type.equals("STRING")){
-			setSymbolValue(null);
+		boolean exists = false;
+		for(Symbol sym: cur.symbols){
+			if(sym.name.equals(name)){
+				isError = true;
+				errorList.add(name);
+			}
+		}
+		if(!exists){
+			Symbol s = new Symbol();
+			s.name = name;
+			s.type = type;
+			curSym = s;
+			if(!type.equals("STRING")){
+				setSymbolValue(null);
+			}
 		}
 	}
 	
@@ -42,19 +53,24 @@ public class SymbolTable {
 	}
 	
 	public void printTable(){
-		printTable(root);
+		if(!isError){
+			printTable(root);
+		}
+		else{
+			System.out.println("DECLARATION ERROR " + errorList.get(0));
+		}
 	}
 	
 	public void printTable(Scope curScope){
 		if(curScope.equals(root)){
-			System.out.print("Symbol tabel " + curScope.name);
+			System.out.print("Symbol table " + curScope.name);
 		} else {
-			System.out.print("\nSymbol tabel " + curScope.name);
+			System.out.print("\nSymbol table " + curScope.name);
 		}
 		
 		for(Symbol symbol : curScope.symbols){
 			if(symbol.type.equals("STRING")){
-				System.out.print("\nname " + symbol.name + " type " + symbol.type + " value" + symbol.value);
+				System.out.print("\nname " + symbol.name + " type " + symbol.type + " value " + symbol.value);
 			} else {
 				System.out.print("\nname " + symbol.name + " type " + symbol.type);
 			}
