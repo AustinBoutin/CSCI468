@@ -1,0 +1,6 @@
+Symbol table GLOBAL
+name a type INT
+name b type INT
+name c type INT
+
+Symbol table main

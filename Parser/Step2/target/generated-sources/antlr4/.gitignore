@@ -12,3 +12,9 @@
 /HelloLexer.tokens
 /HelloListener.java
 /HelloParser.java
+/Test.tokens
+/TestBaseListener.java
+/TestLexer.java
+/TestLexer.tokens
+/TestListener.java
+/TestParser.java

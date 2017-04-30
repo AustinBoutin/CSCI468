@@ -1,4 +1,4 @@
-grammar Little2;
+grammar Test;
 r : program EOF;
 program : 'PROGRAM' id 'BEGIN' pgm_body 'END';
 id : IDENTIFIER;
@@ -31,21 +31,22 @@ assign_expr : id ':=' expr;
 read_stmt : 'READ' '(' id_list ')' ';';
 write_stmt : 'WRITE' '(' id_list ')' ';';
 return_stmt : 'RETURN' expr ';';
+ 
+expr : expr_prefix? factor;
+expr_prefix : expr_prime;
+expr_prime : (factor addop expr_prime)?;
+factor : factor_prefix postfix_expr;
+factor_prefix : factor_prime;
+factor_prime : (postfix_expr mulop factor_prime)?;
+postfix_expr : primary|call_expr;
+call_expr : id '(' expr_list? ')';
+expr_list : expr expr_list_tail?;
+expr_list_tail : ',' expr expr_list_tail?;
+primary : ('(' expr ')')|(id)|(INTLITERAL)|(FLOATLITERAL);
+addop : '+'|'-';
+mulop : '*'|'/';
 
-expr
-    : '!' expr #bangExpr
-    | '(' expr ')'  #parensExpr
-    | expr ('*'|'/') expr #multdivmodExpr
-    | expr ('+'|'-') expr   #addminusExpr
-    | expr '&&' expr               #andExpr
-    | expr '||' expr                #orExpr
-    | INTLITERAL #intExpr
-    | FLOATLITERAL #floatExpr
-    | id         #idExpr
-    ;
-
-if_stmt : 'IF' '(' cond ')' decl? stmt_list? else_prefix 'ENDIF';
-else_prefix: else_part?;
+if_stmt : 'IF' '(' cond ')' decl? stmt_list? else_part? 'ENDIF';
 else_part : 'ELSE' decl? stmt_list?;
 cond : expr compop expr;
 compop : '<'|'>'|'='|'!='|'<='|'>=';

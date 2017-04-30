@@ -1,0 +1,20 @@
+Symbol table GLOBAL
+name count type INT
+name enough type INT
+name newapprox type FLOAT
+name approx type FLOAT
+name num type FLOAT
+name tolerance type FLOAT
+name diff type FLOAT
+
+Symbol table main
+
+Symbol table BLOCK 1
+
+Symbol table BLOCK 2
+
+Symbol table BLOCK 3
+
+Symbol table BLOCK 4
+
+Symbol table BLOCK 5

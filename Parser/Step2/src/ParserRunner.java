@@ -1,4 +1,5 @@
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.File;
@@ -18,13 +19,19 @@ public class ParserRunner
 	
 	        CommonTokenStream tokens = new CommonTokenStream(lexer);
 	        Little2Parser parser = new Little2Parser(tokens);
-	        Listener  listener = new  Listener();
+	        IRGenerator  listener = new  IRGenerator();
 	        for(int i=0; i<parser.getErrorListeners().size(); i++){
 	        	parser.removeErrorListener(parser.getErrorListeners().get(i));
 	        }
-	        new  ParseTreeWalker ().walk(listener ,parser.program());
+	        ParseTreeWalker ptWalker = new  ParseTreeWalker ();
+	        ptWalker.walk(listener ,parser.program());
 	        SymbolTable s = listener.getSymbolTable();
-	        s.printTable();
+	        //System.out.println(tokens.getTokens());
+	        //s.printTable();
+	        //System.out.println();
+	        listener.printIR();
+	        TinyGenerator tg = new TinyGenerator(listener.getIRList(), s);
+	        tg.printTiny();
 	        //prettyPrint(listener.getSymbolTable());
 	        
 	        /*parser.r();
@@ -40,3 +47,5 @@ public class ParserRunner
 	      }
     }
 }
+
+ 
